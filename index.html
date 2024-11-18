@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API practice</title>
+    <style>
+      table,
+      th,
+      tr,
+      td {
+        border: 1px solid black;
+      }
+      td,
+      th {
+        width: 100px;
+      }
+    </style>
+    <script>
+      const getUrl = async () => {
+        const Url = await fetch("https://randomuser.me/api/");
+        jsonData = await Url.json();
+
+        const name =
+          jsonData.results[0].name.title +
+          " " +
+          jsonData.results[0].name.first +
+          " " +
+          jsonData.results[0].name.last;
+
+        const email = jsonData.results[0].email;
+        const phone = jsonData.results[0].phone;
+        const adress =
+          jsonData.results[0].location.street.number +
+          " " +
+          jsonData.results[0].location.street.name;
+        +(+" ") +
+          jsonData.results[0].location.city +
+          " " +
+          jsonData.results[0].location.state +
+          " " +
+          jsonData.results[0].location.country;
+
+        const tableBody = document.querySelector("#userDataTable tbody");
+        const row = document.createElement("tr");
+
+        const nameColumn = document.createElement("td");
+        nameColumn.textContent = name;
+        row.appendChild(nameColumn);
+
+        const emailColumn = document.createElement("td");
+        emailColumn.textContent = email;
+        row.appendChild(emailColumn);
+
+        const phoneColumn = document.createElement("td");
+        phoneColumn.textContent = phone;
+        row.appendChild(phoneColumn);
+
+        const adressColumn = document.createElement("td");
+        adressColumn.textContent = adress;
+        row.appendChild(adressColumn);
+
+        tableBody.appendChild(row);
+      };
+      getUrl();
+    </script>
+  </head>
+  <body>
+    <table id="userDataTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Adress</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+</html>
